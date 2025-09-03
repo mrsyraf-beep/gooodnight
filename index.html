@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <title>Good Night Darin</title>
+  <title>Good Night Darinnn</title>
   <style>
     body {
       margin: 0;
@@ -10,69 +10,115 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+      background: radial-gradient(ellipse at bottom, #0d1b2a 0%, #000000 100%);
       overflow: hidden;
-      font-family: "Segoe UI", sans-serif;
+      font-family: "Poppins", sans-serif;
       color: #fff;
       text-align: center;
       flex-direction: column;
     }
-    h1 { 
-      font-size: 3em; 
-      margin-bottom: 0.5em; 
-      text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff; 
+
+    h1 {
+      font-size: 3.2em;
+      margin-bottom: 0.4em;
+      text-shadow: 0 0 20px #00eaff, 0 0 40px #00eaff;
+      letter-spacing: 2px;
     }
-    p { font-size: 1.5em; line-height: 1.6em; min-height: 3em; }
-    /* Aurora effect */
+
+    p {
+      font-size: 1.4em;
+      line-height: 1.6em;
+      opacity: 0.9;
+    }
+
+    /* Aurora gradient */
     .aurora {
       position: absolute;
       width: 200%;
       height: 200%;
-      background: conic-gradient(from 0deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+      background: conic-gradient(from 90deg, #3a86ff, #8338ec, #ff006e, #fb5607);
       mix-blend-mode: screen;
       filter: blur(200px);
-      animation: auroraMove 15s linear infinite;
+      animation: auroraMove 18s linear infinite;
+      opacity: 0.6;
     }
     @keyframes auroraMove {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
     }
+
     /* Stars */
-    .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s infinite ease-in-out; }
-    @keyframes twinkle { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+    .star {
+      position: absolute;
+      width: 2px;
+      height: 2px;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s infinite ease-in-out;
+      opacity: 0.6;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: 0.2; }
+      50% { opacity: 1; }
+    }
+
     /* Shooting star */
     .shooting-star {
       position: absolute;
-      width: 150px;
+      width: 120px;
       height: 2px;
       background: linear-gradient(270deg, white, transparent);
       top: -100px;
-      animation: shoot 3s linear forwards;
+      animation: shoot 2.5s linear forwards;
+      opacity: 0.8;
     }
     @keyframes shoot {
       0% { transform: translate(0,0) rotate(45deg); opacity:1; }
-      100% { transform: translate(-600px,600px) rotate(45deg); opacity:0; }
+      100% { transform: translate(-500px,500px) rotate(45deg); opacity:0; }
     }
-    /* Fireworks */
-    .firework {
-      position: absolute;
-      border-radius: 50%;
-      opacity: 0;
-      animation: explode 1s ease-out forwards;
-    }
-    @keyframes explode {
-      0% { transform: scale(0); opacity:1; }
-      100% { transform: scale(1); opacity:0; }
-    }
+
     /* Modal */
-    .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:10; }
-    .modal-content { background:#1b263b; padding:30px; border-radius:15px; text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.3); animation: fadeIn 1.5s ease; }
-    .modal-content p { font-size:1.3em; margin-bottom:20px; }
-    .modal button { padding:10px 20px; font-size:1em; background:#fdf5e6; border:none; border-radius:10px; cursor:pointer; color:#1b263b; font-weight:bold; transition:0.3s; }
-    .modal button:hover { background:#ffd6a5; }
+    .modal {
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.85);
+      display:flex; justify-content:center; align-items:center;
+      z-index:10;
+    }
+    .modal-content {
+      background:#1b263b;
+      padding:30px;
+      border-radius:15px;
+      text-align:center;
+      box-shadow:0 0 20px rgba(255,255,255,0.3);
+      animation: fadeIn 1.2s ease;
+    }
+    .modal-content p { font-size:1.2em; margin-bottom:20px; }
+    .modal button {
+      padding:10px 25px;
+      font-size:1em;
+      background:#00eaff;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+      color:#0a192f;
+      font-weight:bold;
+      transition:0.3s;
+    }
+    .modal button:hover { background:#38f9d7; }
+
     /* Emoji rain */
-    .emoji { position:absolute; top:-50px; font-size:24px; animation:fall linear forwards; }
-    @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
+    .emoji {
+      position:absolute;
+      top:-50px;
+      font-size:22px;
+      animation: fall linear forwards;
+      opacity: 0.9;
+    }
+    @keyframes fall {
+      to { transform:translateY(110vh); opacity:0; }
+    }
+
     /* Fade in */
     #content { display:none; animation: fadeIn 2s ease; }
     @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
@@ -83,8 +129,8 @@
 
   <div class="modal" id="popupModal">
     <div class="modal-content">
-      <p> Jangan tido lewattt,<br> jaga kesihatan kamu tuu!!!!</p>
-      <button id="okBtn">OK, Start</button>
+      <p> Jangan tido lewattt,<br> jaga kesihatan kamu tuu!!!</p>
+      <button id="okBtn">tekan sini!</button>
     </div>
   </div>
 
@@ -95,12 +141,12 @@
 
   <script>
     // Stars
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 80; i++) {
       let star = document.createElement("div");
       star.className = "star";
       star.style.top = Math.random() * window.innerHeight + "px";
       star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.animationDuration = (1 + Math.random() * 3) + "s";
+      star.style.animationDuration = (2 + Math.random() * 4) + "s";
       document.body.appendChild(star);
     }
 
@@ -114,9 +160,8 @@
       typeWriter("Good Night, Darin 🌙", "title", () => {
         typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
       });
-      setInterval(createEmoji, 1500);
-      setInterval(shootingStar, 5000);
-      setInterval(firework, 4000);
+      setInterval(createEmoji, 2500);
+      setInterval(shootingStar, 9000);
     });
 
     function typeWriter(text, elementId, callback) {
@@ -137,42 +182,26 @@
     }
 
     // Emoji rain
-    const emojis = ["✨","🌙","😴","⭐"];
+    const emojis = ["✨","🌙","⭐"];
     function createEmoji() {
       const emoji = document.createElement("div");
       emoji.className = "emoji";
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       emoji.style.left = Math.random() * window.innerWidth + "px";
-      emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
-      emoji.style.fontSize = (20 + Math.random()*20) + "px";
+      emoji.style.animationDuration = (5 + Math.random() * 3) + "s";
+      emoji.style.fontSize = (18 + Math.random()*10) + "px";
       document.body.appendChild(emoji);
-      setTimeout(() => emoji.remove(), 6000);
+      setTimeout(() => emoji.remove(), 8000);
     }
 
     // Shooting star
     function shootingStar() {
       const star = document.createElement("div");
       star.className = "shooting-star";
-      star.style.top = Math.random() * window.innerHeight/2 + "px";
+      star.style.top = Math.random() * (window.innerHeight/2) + "px";
       star.style.left = (window.innerWidth - 200) + "px";
       document.body.appendChild(star);
-      setTimeout(() => star.remove(), 3000);
-    }
-
-    // Fireworks
-    function firework() {
-      const fw = document.createElement("div");
-      fw.className = "firework";
-      const size = 80 + Math.random() * 50;
-      fw.style.width = size + "px";
-      fw.style.height = size + "px";
-      fw.style.left = Math.random() * window.innerWidth + "px";
-      fw.style.top = Math.random() * (window.innerHeight/2) + "px";
-      fw.style.background = `radial-gradient(circle, 
-        hsl(${Math.random()*360},100%,60%) 0%, 
-        transparent 70%)`;
-      document.body.appendChild(fw);
-      setTimeout(() => fw.remove(), 1000);
+      setTimeout(() => star.remove(), 2500);
     }
   </script>
 </body>
