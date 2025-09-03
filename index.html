@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <title>Good Night Darin</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
+      overflow: hidden;
+      font-family: "Segoe UI", sans-serif;
+      color: #fff;
+      text-align: center;
+      flex-direction: column;
+    }
+    h1 { font-size: 3em; margin-bottom: 0.5em; }
+    p { font-size: 1.5em; line-height: 1.6em; min-height: 3em; }
+    img.teddy { margin-top: 20px; width: 150px; animation: float 3s ease-in-out infinite; }
+    @keyframes float { 0%, 100% { transform: translateY(0px);} 50% { transform: translateY(-10px);} }
+    .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+    .moon { position: absolute; top:10%; right:15%; width:100px; height:100px; background:#fdf5e6; border-radius:50%; box-shadow:0 0 30px #fdf5e6; }
+    #musicBtn { position: absolute; bottom:20px; right:20px; background:#fff; color:#1b263b; border:none; border-radius:50%; width:50px; height:50px; font-size:22px; cursor:pointer; box-shadow:0 0 10px rgba(255,255,255,0.5); transition:0.3s; display:none; }
+    #musicBtn:hover { transform: scale(1.1); }
+    .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:10; }
+    .modal-content { background:#1b263b; padding:30px; border-radius:15px; text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.3); animation: fadeIn 1.5s ease; }
+    .modal-content p { font-size:1.3em; margin-bottom:20px; }
+    .modal button { padding:10px 20px; font-size:1em; background:#fdf5e6; border:none; border-radius:10px; cursor:pointer; color:#1b263b; font-weight:bold; transition:0.3s; }
+    .modal button:hover { background:#ffd6a5; }
+    .emoji { position:absolute; top:-50px; font-size:24px; animation:fall linear forwards; }
+    @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
+  </style>
+</head>
+<body>
+  <div class="modal" id="popupModal">
+    <div class="modal-content">
+      <p>😡 Jangan tido lewattt,<br> jaga kesihatan kamu tuu!</p>
+      <button id="okBtn">OK</button>
+    </div>
+  </div>
+  <div id="content" style="display:none;">
+    <h1 id="title"></h1>
+    <p id="message"></p>
+    <img src="assets/teddy.png" alt="Teddy Bear" class="teddy">
+  </div>
+  <div class="moon"></div>
+  <button id="musicBtn">🎵</button>
+  <audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f615ca0bb.mp3?filename=relaxing-piano-melody-110744.mp3" type="audio/mp3">
+  </audio>
+  <script>
+    for (let i = 0; i < 100; i++) {
+      let star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (1 + Math.random() * 3) + "s";
+      document.body.appendChild(star);
+    }
+    const modal = document.getElementById("popupModal");
+    const okBtn = document.getElementById("okBtn");
+    const content = document.getElementById("content");
+    const musicBtn = document.getElementById("musicBtn");
+    okBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      content.style.display = "block";
+      musicBtn.style.display = "block";
+      typeWriter("Good Night, Darin 🌙", "title", () => {
+        typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
+      });
+      setInterval(createEmoji, 1500);
+    });
+    function typeWriter(text, elementId, callback) {
+      let i = 0; const speed = 70; const element = document.getElementById(elementId); element.textContent = "";
+      function typing() { if (i < text.length) { element.textContent += text.charAt(i); i++; setTimeout(typing, speed); } else if (callback) { setTimeout(callback, 500); } }
+      typing();
+    }
+    const bgMusic = document.getElementById("bgMusic"); let playing = false;
+    musicBtn.addEventListener("click", () => { if (!playing) { bgMusic.play(); playing = true; musicBtn.textContent = "⏸️"; } else { bgMusic.pause(); playing = false; musicBtn.textContent = "🎵"; } });
+    const emojis = ["✨","🌙","😴","⭐"];
+    function createEmoji() { const emoji = document.createElement("div"); emoji.className = "emoji"; emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; emoji.style.left = Math.random() * window.innerWidth + "px"; emoji.style.animationDuration = (3 + Math.random() * 3) + "s"; document.body.appendChild(emoji); setTimeout(() => emoji.remove(), 6000); }
+  </script>
+</body>
+</html>
