@@ -1,338 +1,277 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Good Night Darin — Ultimate</title>
-<style>
-  :root{
-    --bg1:#0d1b2a; --bg2:#1b263b; --bg3:#415a77; --bg4:#0b132b;
-    --neon1:#00f5d4; --neon2:#9d4edd; --neon3:#ff4d6d; --neon4:#ffd166;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; overflow:hidden; font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-    display:flex; align-items:center; justify-content:center; flex-direction:column; color:#fff; text-align:center;
-    perspective:800px;
-    background: radial-gradient(1200px 600px at 70% -10%, rgba(157,78,221,.20), transparent 60%),
-                radial-gradient(900px 500px at 20% 10%, rgba(0,245,212,.18), transparent 60%),
-                linear-gradient(120deg, var(--bg1), var(--bg2) 40%, var(--bg3) 70%, var(--bg4));
-    animation:bgShift 18s ease-in-out infinite;
-  }
-  @keyframes bgShift{
-    0%{filter:hue-rotate(0deg)} 50%{filter:hue-rotate(20deg)} 100%{filter:hue-rotate(0deg)}
-  }
+  <meta charset="UTF-8">
+  <title>Good Night Darin</title>
+  <style>
+    /* 🌌 Aurora Sky Background */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(270deg, #0d1b2a, #1b263b, #415a77, #0d1b2a);
+      background-size: 800% 800%;
+      animation: aurora 20s ease infinite;
+      overflow: hidden;
+      font-family: "Segoe UI", sans-serif;
+      color: #fff;
+      text-align: center;
+      flex-direction: column;
+    }
+    @keyframes aurora {
+      0% {background-position:0% 50%;}
+      50% {background-position:100% 50%;}
+      100% {background-position:0% 50%;}
+    }
 
-  /* Aurora layers */
-  .aurora, .aurora:before, .aurora:after{
-    position:fixed; inset:0; pointer-events:none; mix-blend-mode:screen;
-    background: conic-gradient(from 180deg at 50% 10%, rgba(0,245,212,.0), rgba(0,245,212,.15), rgba(157,78,221,.12), rgba(255,77,109,.10), transparent 70%);
-    filter: blur(40px);
-    animation: auroraMove 20s linear infinite;
-  }
-  .aurora:before{content:""; animation-duration:28s; opacity:.7}
-  .aurora:after{content:""; animation-duration:34s; opacity:.5}
-  @keyframes auroraMove{
-    0%{transform:translateY(-5%) rotate(0deg) scale(1.05)}
-    50%{transform:translateY(2%) rotate(180deg) scale(1.1)}
-    100%{transform:translateY(-5%) rotate(360deg) scale(1.05)}
-  }
+    /* ✨ Glowing Text */
+    h1 {
+      font-size: 3em;
+      margin-bottom: 0.5em;
+      background: linear-gradient(90deg, #00f5d4, #00bbf9, #9b5de5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 20px rgba(0,255,200,0.6);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00f5d4; }
+      to { text-shadow: 0 0 25px #9b5de5; }
+    }
+    p { font-size: 1.5em; line-height: 1.6em; min-height: 3em; }
 
-  /* Text */
-  h1{
-    margin:0 16px .2em; font-size: clamp(2.2rem, 4.5vw, 4rem); letter-spacing:.5px;
-    text-shadow: 0 0 12px #fff, 0 0 24px var(--neon1), 0 0 48px var(--neon2);
-    animation: titlePulse 2.2s ease-in-out infinite alternate;
-    transform-style:preserve-3d;
-  }
-  @keyframes titlePulse{
-    from{filter:drop-shadow(0 0 8px var(--neon1))}
-    to{filter:drop-shadow(0 0 18px var(--neon2))}
-  }
-  p.lead{margin:0 16px 14px; font-size: clamp(1rem, 2.5vw, 1.4rem); min-height:2.2em; opacity:.95}
+    /* ⭐ Stars */
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white; border-radius: 50%;
+      animation: twinkle 2s infinite ease-in-out;
+    }
+    @keyframes twinkle {
+      0%,100%{opacity:0.2;} 50%{opacity:1;}
+    }
 
-  /* Modal */
-  .modal{position:fixed; inset:0; background:rgba(0,0,0,.78); display:flex; align-items:center; justify-content:center; z-index:20}
-  .modal-card{
-    background:#0f1c2d; padding:26px 22px; border-radius:16px; width:min(92vw,540px); text-align:center;
-    box-shadow:0 10px 40px rgba(0,0,0,.45), 0 0 60px rgba(0,245,212,.15) inset;
-    border:1px solid rgba(255,255,255,.07); animation:pop .5s ease;
-  }
-  .modal-card p{margin:0 0 18px; font-size:1.1rem}
-  .btn{
-    border:0; padding:12px 20px; border-radius:12px; cursor:pointer; font-weight:700;
-    background:linear-gradient(90deg, var(--neon1), var(--neon2)); color:#0b132b;
-    box-shadow:0 6px 24px rgba(0,245,212,.25), 0 0 18px rgba(157,78,221,.25);
-    transition:transform .15s ease;
-  }
-  .btn:active{transform:translateY(1px)}
-  @keyframes pop{from{transform:scale(.95); opacity:0} to{transform:scale(1); opacity:1}}
+    /* 🌙 Moon */
+    .moon {
+      position: absolute; top:10%; right:15%;
+      width:100px; height:100px; background:#fdf5e6;
+      border-radius:50%; box-shadow:0 0 30px #fdf5e6;
+    }
 
-  /* Controls */
-  #musicBtn{
-    position:fixed; right:18px; bottom:18px; width:54px; height:54px; border-radius:50%;
-    border:0; background:#fff; color:#0b132b; font-size:22px; display:none; cursor:pointer;
-    box-shadow:0 10px 30px rgba(255,255,255,.35);
-  }
+    /* 🎵 Music Button */
+    #musicBtn {
+      position: absolute; bottom:20px; right:20px;
+      background:#fff; color:#1b263b; border:none;
+      border-radius:50%; width:55px; height:55px;
+      font-size:22px; cursor:pointer;
+      box-shadow:0 0 15px rgba(255,255,255,0.7);
+      transition:0.3s; display:none;
+    }
+    #musicBtn:hover {
+      transform: scale(1.15);
+      box-shadow:0 0 25px rgba(0,255,200,0.9);
+    }
 
-  /* Stars */
-  .star{position:fixed; width:2px; height:2px; background:#fff; border-radius:50%; opacity:.85; z-index:0;
-        box-shadow:0 0 6px #fff, 0 0 10px rgba(255,255,255,.7); animation:twinkle 2.2s ease-in-out infinite}
-  @keyframes twinkle{0%,100%{opacity:.25} 50%{opacity:1}}
+    /* 📌 Modal */
+    .modal {
+      position:fixed; top:0; left:0;
+      width:100%; height:100%;
+      background:rgba(0,0,0,0.8);
+      display:flex; justify-content:center; align-items:center;
+      z-index:10; animation: fadeIn 1s;
+    }
+    .modal-content {
+      background:#1b263b; padding:30px; border-radius:15px;
+      text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.3);
+      animation: fadeIn 1.5s ease;
+    }
+    .modal-content p { font-size:1.3em; margin-bottom:20px; }
+    .modal button {
+      padding:10px 25px; font-size:1em;
+      background:#fdf5e6; border:none; border-radius:10px;
+      cursor:pointer; color:#1b263b; font-weight:bold;
+      transition:0.3s;
+    }
+    .modal button:hover { background:#ffd6a5; }
+    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 
-  /* Shooting star */
-  .shooting-star{
-    position:fixed; width:2px; height:110px; transform:rotate(45deg); z-index:0;
-    background:linear-gradient(180deg, #fff, rgba(255,255,255,0));
-    filter:drop-shadow(0 0 8px #fff);
-    animation:shoot 1.8s linear forwards;
-  }
-  @keyframes shoot{
-    from{transform:translate(-15vw,-15vh) rotate(45deg); opacity:.9}
-    to{transform:translate(120vw,120vh) rotate(45deg); opacity:0}
-  }
+    /* 🌙 Emoji Rain */
+    .emoji {
+      position:absolute; top:-50px; font-size:24px;
+      animation:fall linear forwards;
+    }
+    @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
 
-  /* Emoji rain */
-  .emoji{
-    position:fixed; top:-40px; font-size:24px; animation:fall linear forwards; z-index:1;
-    text-shadow: 0 0 8px rgba(255,255,255,.6);
-  }
-  @keyframes fall{
-    to{ transform:translateY(110vh) rotate(360deg); opacity:0 }
-  }
-
-  /* Fireworks with trails */
-  .fw-spark{
-    position:fixed; width:6px; height:6px; border-radius:50%;
-    will-change:transform, opacity; z-index:2;
-    box-shadow:0 0 12px currentColor, 0 0 28px currentColor;
-    animation:fwMove 900ms ease-out forwards;
-  }
-  .fw-trail{
-    position:fixed; width:2px; height:2px; border-radius:50%; opacity:.7; filter:blur(1px);
-    box-shadow:0 0 8px currentColor; animation:fwTrail 700ms ease-out forwards;
-  }
-  @keyframes fwMove{
-    from{transform:translate(0,0) scale(1); opacity:1}
-    to{transform:translate(var(--dx), var(--dy)) scale(.7); opacity:0}
-  }
-  @keyframes fwTrail{
-    from{transform:translate(0,0); opacity:.8}
-    to{transform:translate(var(--dx), var(--dy)); opacity:0}
-  }
-
-  /* Floating particles (dream dust) */
-  .dust{
-    position:fixed; bottom:-10px; width:3px; height:3px; border-radius:50%;
-    background:rgba(255,255,255,.8); box-shadow:0 0 8px rgba(255,255,255,.8);
-    animation:dustUp linear forwards; z-index:0;
-  }
-  @keyframes dustUp{
-    from{transform:translateY(0) scale(1); opacity:.6}
-    to{transform:translateY(-110vh) scale(1.8); opacity:0}
-  }
-
-  /* Visualizer bars */
-  .viz-wrap{position:fixed; left:50%; bottom:90px; transform:translateX(-50%); height:38px; display:none; z-index:3}
-  .bar{width:6px; margin:0 2px; display:inline-block; background:linear-gradient(180deg, var(--neon4), var(--neon2));
-       box-shadow:0 0 10px var(--neon4); height:6px}
-
-</style>
+    /* 🎆 Fireworks */
+    .firework {
+      position: absolute; border-radius: 50%;
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body>
-  <div class="aurora"></div>
-
-  <!-- Modal -->
-  <div class="modal" id="modal">
-    <div class="modal-card">
-      <p> Jangan tido lewattt,<br> jaga kesihatan kamu tuu!!!!</p>
-      <button class="btn" id="startBtn">OK, Start ✨</button>
+  <!-- Popup -->
+  <div class="modal" id="popupModal">
+    <div class="modal-content">
+      <p>😡 Jangan tido lewattt,<br> jaga kesihatan kamu tuu!</p>
+      <button id="okBtn">OK, Start</button>
     </div>
   </div>
 
-  <!-- Content -->
-  <h1 id="title" style="display:none;"></h1>
-  <p class="lead" id="message" style="display:none;"></p>
+  <!-- Main Content -->
+  <div id="content" style="display:none;">
+    <h1 id="title"></h1>
+    <p id="message"></p>
+  </div>
 
-  <!-- Controls -->
+  <div class="moon"></div>
   <button id="musicBtn">🎵</button>
 
-  <!-- Visualizer -->
-  <div class="viz-wrap" id="viz"></div>
-
-  <!-- Audio -->
-  <audio id="bgMusic" loop crossorigin="anonymous">
+  <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f615ca0bb.mp3?filename=relaxing-piano-melody-110744.mp3" type="audio/mp3">
   </audio>
 
-<script>
-(() => {
-  // Utility
-  const rand = (min,max)=> Math.random()*(max-min)+min;
-  const pick = arr => arr[Math.floor(Math.random()*arr.length)];
-  const colors = ["#00f5d4","#9d4edd","#ff4d6d","#ffd166","#06d6a0","#4cc9f0","#f72585"];
-
-  // Stars
-  for(let i=0;i<120;i++){
-    const s=document.createElement('div'); s.className='star';
-    s.style.left = rand(0, 100)+'vw'; s.style.top = rand(0,100)+'vh';
-    s.style.animationDuration = rand(1.2,3.5)+'s';
-    document.body.appendChild(s);
-  }
-
-  // Floating dust
-  setInterval(()=>{
-    const n = Math.floor(rand(2,5));
-    for(let i=0;i<n;i++){
-      const d=document.createElement('div'); d.className='dust';
-      const x=rand(0,100);
-      d.style.left = x+'vw';
-      d.style.animationDuration = rand(6,12)+'s';
-      d.style.opacity = rand(.25,.7);
-      document.body.appendChild(d);
-      setTimeout(()=>d.remove(), 12000);
+  <script>
+    // 🌟 Generate stars
+    for (let i = 0; i < 100; i++) {
+      let star = document.createElement("div");
+      star.className = "star";
+      star.style.top = Math.random() * window.innerHeight + "px";
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.animationDuration = (1 + Math.random() * 3) + "s";
+      document.body.appendChild(star);
     }
-  }, 900);
 
-  // Shooting star
-  function shootingStar(){
-    const st = document.createElement('div');
-    st.className='shooting-star';
-    st.style.top = rand(0,45)+'vh';
-    document.body.appendChild(st);
-    setTimeout(()=>st.remove(), 2000);
-  }
-  setInterval(()=>{ if(started) shootingStar(); }, 4500 + Math.random()*2500);
+    const modal = document.getElementById("popupModal");
+    const okBtn = document.getElementById("okBtn");
+    const content = document.getElementById("content");
+    const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic");
 
-  // Fireworks
-  function firework(){
-    const x = rand(10, 90), y = rand(10, 55); // top half
-    const amount = 24;
-    for(let i=0;i<amount;i++){
-      const a = (i/amount)*Math.PI*2;
-      const dist = rand(60,120);
-      const dx = Math.cos(a)*dist, dy = Math.sin(a)*dist;
-      const spark = document.createElement('div');
-      spark.className='fw-spark';
-      spark.style.left = calc(${x}vw);
-      spark.style.top  = calc(${y}vh);
-      spark.style.setProperty('--dx', dx+'px');
-      spark.style.setProperty('--dy', dy+'px');
-      spark.style.color = pick(colors);
-      document.body.appendChild(spark);
-      // tiny trail
-      const trail = document.createElement('div');
-      trail.className='fw-trail';
-      trail.style.left = calc(${x}vw);
-      trail.style.top  = calc(${y}vh);
-      trail.style.setProperty('--dx', (dx*0.9)+'px');
-      trail.style.setProperty('--dy', (dy*0.9)+'px');
-      trail.style.color = spark.style.color;
-      document.body.appendChild(trail);
-      setTimeout(()=>{ spark.remove(); trail.remove(); }, 1000);
-    }
-  }
-  setInterval(()=>{ if(started) firework(); }, 3000);
+    // ✅ Modal button
+    okBtn.addEventListener("click", () => {
+      modal.style.display = "none";
+      content.style.display = "block";
+      musicBtn.style.display = "block";
 
-  // Emoji rain
-  const emojis = ["✨","🌙","😴","⭐","💫","🫧"];
-  function dropEmoji(){
-    const e=document.createElement('div'); e.className='emoji'; e.textContent = pick(emojis);
-    e.style.left = rand(2, 98)+'vw'; e.style.fontSize = rand(18,42)+'px'; e.style.animationDuration = rand(3,6)+'s';
-    document.body.appendChild(e); setTimeout(()=>e.remove(), 6500);
-  }
-  setInterval(()=>{ if(started) dropEmoji(); }, 1200);
+      typeWriter("Good Night, Darin 🌙", "title", () => {
+        typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
+      });
 
-  // Typewriter
-  function typeWriter(text, targetId, cb){
-    const el = document.getElementById(targetId); el.textContent = ""; el.style.display='';
-    let i=0; const speed=70;
-    (function t(){ if(i<text.length){ el.textContent += text.charAt(i++); setTimeout(t, speed);} else if(cb){ setTimeout(cb, 450); } })();
-  }
-
-  // 3D tilt (subtle)
-  let tiltTarget = document.body;
-  window.addEventListener('mousemove', e=>{
-    const cx=window.innerWidth/2, cy=window.innerHeight/2;
-    const dx=(e.clientX-cx)/cx, dy=(e.clientY-cy)/cy;
-    tiltTarget.style.transform = rotateY(${dx*2}deg) rotateX(${(-dy)*2}deg);
-  });
-
-  // Sparkle cursor
-  window.addEventListener('pointermove', e=>{
-    if(!started) return;
-    for(let i=0;i<2;i++){
-      const dot=document.createElement('div');
-      dot.className='fw-trail';
-      dot.style.left = (e.clientX + rand(-6,6))+'px';
-      dot.style.top  = (e.clientY + rand(-6,6))+'px';
-      dot.style.color = pick(colors);
-      dot.style.setProperty('--dx', rand(-20,20)+'px');
-      dot.style.setProperty('--dy', rand(-20,20)+'px');
-      document.body.appendChild(dot);
-      setTimeout(()=>dot.remove(), 600);
-    }
-  });
-
-  // Audio + Visualizer
-  const audio = document.getElementById('bgMusic');
-  const musicBtn = document.getElementById('musicBtn');
-  const vizWrap = document.getElementById('viz');
-  let ctx, src, analyser, dataArr, bars = [];
-  function initAudio(){
-    if(ctx) return;
-    try{
-      ctx = new (window.AudioContext||window.webkitAudioContext)();
-      src = ctx.createMediaElementSource(audio);
-      analyser = ctx.createAnalyser(); analyser.fftSize = 64;
-      dataArr = new Uint8Array(analyser.frequencyBinCount);
-      src.connect(analyser); analyser.connect(ctx.destination);
-      // build bars
-      vizWrap.innerHTML=""; bars=[];
-      const count = 18;
-      for(let i=0;i<count;i++){
-        const b=document.createElement('div'); b.className='bar';
-        vizWrap.appendChild(b); bars.push(b);
-      }
-      vizWrap.style.display='block';
-      requestAnimationFrame(drawViz);
-    }catch(e){ console.log('Audio init error:', e); }
-  }
-  function drawViz(){
-    if(!analyser) return;
-    analyser.getByteFrequencyData(dataArr);
-    bars.forEach((b,i)=>{ b.style.height = (6 + dataArr[i]/3)+'px'; });
-    requestAnimationFrame(drawViz);
-  }
-  function playMusic(){
-    initAudio();
-    audio.play().then(()=>{
-      musicBtn.textContent='⏸'; musicOn=true;
-    }).catch(()=>{ /* autoplay blocked until user interacts further */ });
-  }
-  function pauseMusic(){ audio.pause(); musicBtn.textContent='🎵'; musicOn=false; }
-  let musicOn=false;
-
-  musicBtn.addEventListener('click', ()=>{
-    if(!musicOn) playMusic(); else pauseMusic();
-  });
-
-  // Start flow
-  let started=false;
-  document.getElementById('startBtn').addEventListener('click', ()=>{
-    document.getElementById('modal').style.display='none';
-    started=true;
-    typeWriter("Good Night, Darin 🌙", "title", ()=>{
-      typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
+      setInterval(createEmoji, 1500);
+      setInterval(shootingStar, 5000);
+      setInterval(firework, 4000);
     });
-    musicBtn.style.display='block';
-    playMusic();
-    // kick a few effects instantly
-    firework(); shootingStar(); dropEmoji();
-  });
 
-})();
-</script>
+    // ⌨ Typewriter
+    function typeWriter(text, elementId, callback) {
+      let i = 0;
+      const speed = 70;
+      const element = document.getElementById(elementId);
+      element.textContent = "";
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, speed);
+        } else if (callback) {
+          setTimeout(callback, 500);
+        }
+      }
+      typing();
+    }
+
+    // 🌙 Emoji rain
+    const emojis = ["✨","🌙","😴","⭐"];
+    function createEmoji() {
+      const emoji = document.createElement("div");
+      emoji.className = "emoji";
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      emoji.style.left = Math.random() * window.innerWidth + "px";
+      emoji.style.fontSize = (20 + Math.random() * 20) + "px";
+      emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
+      document.body.appendChild(emoji);
+      setTimeout(() => emoji.remove(), 6000);
+    }
+
+    // 🎵 Music
+    let playing = false;
+    musicBtn.addEventListener("click", () => {
+      if (!playing) {
+        bgMusic.play().then(()=>{
+          playing = true;
+          musicBtn.textContent = "⏸";
+        }).catch(()=>{
+          console.log("Autoplay blocked. User must press button.");
+        });
+      } else {
+        bgMusic.pause();
+        playing = false;
+        musicBtn.textContent = "🎵";
+      }
+    });
+
+    // 🌠 Shooting star
+    function shootingStar() {
+      const star = document.createElement("div");
+      star.className = "shooting";
+      star.style.position = "absolute";
+      star.style.top = Math.random() * window.innerHeight * 0.5 + "px";
+      star.style.left = "-50px";
+      star.style.width = "3px";
+      star.style.height = "3px";
+      star.style.background = "white";
+      star.style.boxShadow = "0 0 10px white, 0 0 20px #00f5d4";
+      star.style.borderRadius = "50%";
+      star.style.zIndex = "5";
+      document.body.appendChild(star);
+
+      let x = 0;
+      const interval = setInterval(() => {
+        x += 15;
+        star.style.transform = translate(${x}px, ${x/3}px);
+        if (x > window.innerWidth) {
+          clearInterval(interval);
+          star.remove();
+        }
+      }, 50);
+    }
+
+    // 🎆 Fireworks
+    function firework() {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight * 0.6;
+
+      for (let i = 0; i < 30; i++) {
+        const spark = document.createElement("div");
+        spark.className = "firework";
+        spark.style.left = x + "px";
+        spark.style.top = y + "px";
+        spark.style.width = "4px";
+        spark.style.height = "4px";
+        spark.style.background = hsl(${Math.random()*360},100%,60%);
+        spark.style.boxShadow = 0 0 10px ${spark.style.background};
+        document.body.appendChild(spark);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const distance = Math.random() * 80 + 40;
+        const dx = Math.cos(angle) * distance;
+        const dy = Math.sin(angle) * distance;
+
+        spark.animate([
+          { transform: "translate(0,0)", opacity: 1 },
+          { transform: translate(${dx}px, ${dy}px), opacity: 0 }
+        ], {
+          duration: 1200 + Math.random() * 500,
+          easing: "ease-out",
+          fill: "forwards"
+        });
+
+        setTimeout(() => spark.remove(), 2000);
+      }
+    }
+  </script>
 </body>
 </html>
