@@ -19,8 +19,6 @@
     }
     h1 { font-size: 3em; margin-bottom: 0.5em; }
     p { font-size: 1.5em; line-height: 1.6em; min-height: 3em; }
-    img.teddy { margin-top: 20px; width: 150px; animation: float 3s ease-in-out infinite; }
-    @keyframes float { 0%, 100% { transform: translateY(0px);} 50% { transform: translateY(-10px);} }
     .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s infinite ease-in-out; }
     @keyframes twinkle { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
     .moon { position: absolute; top:10%; right:15%; width:100px; height:100px; background:#fdf5e6; border-radius:50%; box-shadow:0 0 30px #fdf5e6; }
@@ -33,6 +31,26 @@
     .modal button:hover { background:#ffd6a5; }
     .emoji { position:absolute; top:-50px; font-size:24px; animation:fall linear forwards; }
     @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
+
+    /* Fireworks */
+    .firework {
+      position: absolute;
+      width: 5px;
+      height: 5px;
+      background: transparent;
+    }
+    .spark {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: yellow;
+      border-radius: 50%;
+      animation: explode 1.5s ease-out forwards;
+    }
+    @keyframes explode {
+      from { transform: translate(0,0) scale(1); opacity: 1; }
+      to   { transform: translate(var(--x), var(--y)) scale(0.5); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -45,7 +63,6 @@
   <div id="content" style="display:none;">
     <h1 id="title"></h1>
     <p id="message"></p>
-    <img src="assets/teddy.png" alt="Teddy Bear" class="teddy">
   </div>
   <div class="moon"></div>
   <button id="musicBtn">🎵</button>
@@ -53,6 +70,7 @@
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f615ca0bb.mp3?filename=relaxing-piano-melody-110744.mp3" type="audio/mp3">
   </audio>
   <script>
+    // Generate stars
     for (let i = 0; i < 100; i++) {
       let star = document.createElement("div");
       star.className = "star";
@@ -61,28 +79,93 @@
       star.style.animationDuration = (1 + Math.random() * 3) + "s";
       document.body.appendChild(star);
     }
+
     const modal = document.getElementById("popupModal");
     const okBtn = document.getElementById("okBtn");
     const content = document.getElementById("content");
     const musicBtn = document.getElementById("musicBtn");
+    const bgMusic = document.getElementById("bgMusic"); 
+    let playing = false;
+
     okBtn.addEventListener("click", () => {
       modal.style.display = "none";
       content.style.display = "block";
       musicBtn.style.display = "block";
+
+      // Auto play music selepas tekan OK
+      bgMusic.play();
+      playing = true;
+      musicBtn.textContent = "⏸";
+
       typeWriter("Good Night, Darin 🌙", "title", () => {
         typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
       });
+
       setInterval(createEmoji, 1500);
+      setInterval(createFirework, 3000); // fireworks start
     });
+
     function typeWriter(text, elementId, callback) {
-      let i = 0; const speed = 70; const element = document.getElementById(elementId); element.textContent = "";
-      function typing() { if (i < text.length) { element.textContent += text.charAt(i); i++; setTimeout(typing, speed); } else if (callback) { setTimeout(callback, 500); } }
+      let i = 0; 
+      const speed = 70; 
+      const element = document.getElementById(elementId); 
+      element.textContent = "";
+      function typing() { 
+        if (i < text.length) { 
+          element.textContent += text.charAt(i); 
+          i++; 
+          setTimeout(typing, speed); 
+        } else if (callback) { 
+          setTimeout(callback, 500); 
+        } 
+      }
       typing();
     }
-    const bgMusic = document.getElementById("bgMusic"); let playing = false;
-    musicBtn.addEventListener("click", () => { if (!playing) { bgMusic.play(); playing = true; musicBtn.textContent = "⏸️"; } else { bgMusic.pause(); playing = false; musicBtn.textContent = "🎵"; } });
+
+    musicBtn.addEventListener("click", () => { 
+      if (!playing) { 
+        bgMusic.play(); 
+        playing = true; 
+        musicBtn.textContent = "⏸"; 
+      } else { 
+        bgMusic.pause(); 
+        playing = false; 
+        musicBtn.textContent = "🎵"; 
+      } 
+    });
+
     const emojis = ["✨","🌙","😴","⭐"];
-    function createEmoji() { const emoji = document.createElement("div"); emoji.className = "emoji"; emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; emoji.style.left = Math.random() * window.innerWidth + "px"; emoji.style.animationDuration = (3 + Math.random() * 3) + "s"; document.body.appendChild(emoji); setTimeout(() => emoji.remove(), 6000); }
+    function createEmoji() { 
+      const emoji = document.createElement("div"); 
+      emoji.className = "emoji"; 
+      emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)]; 
+      emoji.style.left = Math.random() * window.innerWidth + "px"; 
+      emoji.style.animationDuration = (3 + Math.random() * 3) + "s"; 
+      document.body.appendChild(emoji); 
+      setTimeout(() => emoji.remove(), 6000); 
+    }
+
+    // Fireworks effect
+    function createFirework() {
+      const firework = document.createElement("div");
+      firework.className = "firework";
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      firework.style.top = Math.random() * window.innerHeight/2 + "px";
+      document.body.appendChild(firework);
+
+      // generate sparks
+      for (let i = 0; i < 20; i++) {
+        const spark = document.createElement("div");
+        spark.className = "spark";
+        const angle = (i / 20) * 2 * Math.PI;
+        const radius = 80;
+        spark.style.setProperty("--x", Math.cos(angle) * radius + "px");
+        spark.style.setProperty("--y", Math.sin(angle) * radius + "px");
+        firework.appendChild(spark);
+      }
+
+      setTimeout(() => firework.remove(), 2000);
+    }
   </script>
 </body>
 </html>
