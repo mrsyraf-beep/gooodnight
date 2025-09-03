@@ -4,137 +4,97 @@
   <meta charset="UTF-8">
   <title>Good Night Darin</title>
   <style>
-    /* 🌌 Aurora Sky Background */
     body {
       margin: 0;
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(270deg, #0d1b2a, #1b263b, #415a77, #0d1b2a);
-      background-size: 800% 800%;
-      animation: aurora 20s ease infinite;
+      background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       overflow: hidden;
       font-family: "Segoe UI", sans-serif;
       color: #fff;
       text-align: center;
       flex-direction: column;
     }
-    @keyframes aurora {
-      0% {background-position:0% 50%;}
-      50% {background-position:100% 50%;}
-      100% {background-position:0% 50%;}
-    }
-
-    /* ✨ Glowing Text */
-    h1 {
-      font-size: 3em;
-      margin-bottom: 0.5em;
-      background: linear-gradient(90deg, #00f5d4, #00bbf9, #9b5de5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 20px rgba(0,255,200,0.6);
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00f5d4; }
-      to { text-shadow: 0 0 25px #9b5de5; }
+    h1 { 
+      font-size: 3em; 
+      margin-bottom: 0.5em; 
+      text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff; 
     }
     p { font-size: 1.5em; line-height: 1.6em; min-height: 3em; }
-
-    /* ⭐ Stars */
-    .star {
+    /* Aurora effect */
+    .aurora {
       position: absolute;
-      width: 2px; height: 2px;
-      background: white; border-radius: 50%;
-      animation: twinkle 2s infinite ease-in-out;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+      mix-blend-mode: screen;
+      filter: blur(200px);
+      animation: auroraMove 15s linear infinite;
     }
-    @keyframes twinkle {
-      0%,100%{opacity:0.2;} 50%{opacity:1;}
+    @keyframes auroraMove {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
-
-    /* 🌙 Moon */
-    .moon {
-      position: absolute; top:10%; right:15%;
-      width:100px; height:100px; background:#fdf5e6;
-      border-radius:50%; box-shadow:0 0 30px #fdf5e6;
+    /* Stars */
+    .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; animation: twinkle 2s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100%{opacity:0.2;} 50%{opacity:1;} }
+    /* Shooting star */
+    .shooting-star {
+      position: absolute;
+      width: 150px;
+      height: 2px;
+      background: linear-gradient(270deg, white, transparent);
+      top: -100px;
+      animation: shoot 3s linear forwards;
     }
-
-    /* 🎵 Music Button */
-    #musicBtn {
-      position: absolute; bottom:20px; right:20px;
-      background:#fff; color:#1b263b; border:none;
-      border-radius:50%; width:55px; height:55px;
-      font-size:22px; cursor:pointer;
-      box-shadow:0 0 15px rgba(255,255,255,0.7);
-      transition:0.3s; display:none;
+    @keyframes shoot {
+      0% { transform: translate(0,0) rotate(45deg); opacity:1; }
+      100% { transform: translate(-600px,600px) rotate(45deg); opacity:0; }
     }
-    #musicBtn:hover {
-      transform: scale(1.15);
-      box-shadow:0 0 25px rgba(0,255,200,0.9);
-    }
-
-    /* 📌 Modal */
-    .modal {
-      position:fixed; top:0; left:0;
-      width:100%; height:100%;
-      background:rgba(0,0,0,0.8);
-      display:flex; justify-content:center; align-items:center;
-      z-index:10; animation: fadeIn 1s;
-    }
-    .modal-content {
-      background:#1b263b; padding:30px; border-radius:15px;
-      text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.3);
-      animation: fadeIn 1.5s ease;
-    }
-    .modal-content p { font-size:1.3em; margin-bottom:20px; }
-    .modal button {
-      padding:10px 25px; font-size:1em;
-      background:#fdf5e6; border:none; border-radius:10px;
-      cursor:pointer; color:#1b263b; font-weight:bold;
-      transition:0.3s;
-    }
-    .modal button:hover { background:#ffd6a5; }
-    @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
-
-    /* 🌙 Emoji Rain */
-    .emoji {
-      position:absolute; top:-50px; font-size:24px;
-      animation:fall linear forwards;
-    }
-    @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
-
-    /* 🎆 Fireworks */
+    /* Fireworks */
     .firework {
-      position: absolute; border-radius: 50%;
-      pointer-events: none;
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0;
+      animation: explode 1s ease-out forwards;
     }
+    @keyframes explode {
+      0% { transform: scale(0); opacity:1; }
+      100% { transform: scale(1); opacity:0; }
+    }
+    /* Modal */
+    .modal { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); display:flex; justify-content:center; align-items:center; z-index:10; }
+    .modal-content { background:#1b263b; padding:30px; border-radius:15px; text-align:center; box-shadow:0 0 20px rgba(255,255,255,0.3); animation: fadeIn 1.5s ease; }
+    .modal-content p { font-size:1.3em; margin-bottom:20px; }
+    .modal button { padding:10px 20px; font-size:1em; background:#fdf5e6; border:none; border-radius:10px; cursor:pointer; color:#1b263b; font-weight:bold; transition:0.3s; }
+    .modal button:hover { background:#ffd6a5; }
+    /* Emoji rain */
+    .emoji { position:absolute; top:-50px; font-size:24px; animation:fall linear forwards; }
+    @keyframes fall { to { transform:translateY(110vh); opacity:0; } }
+    /* Fade in */
+    #content { display:none; animation: fadeIn 2s ease; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
   </style>
 </head>
 <body>
-  <!-- Popup -->
+  <div class="aurora"></div>
+
   <div class="modal" id="popupModal">
     <div class="modal-content">
-      <p>😡 Jangan tido lewattt,<br> jaga kesihatan kamu tuu!</p>
+      <p> Jangan tido lewattt,<br> jaga kesihatan kamu tuu!!!!</p>
       <button id="okBtn">OK, Start</button>
     </div>
   </div>
 
-  <!-- Main Content -->
-  <div id="content" style="display:none;">
+  <div id="content">
     <h1 id="title"></h1>
     <p id="message"></p>
   </div>
 
-  <div class="moon"></div>
-  <button id="musicBtn">🎵</button>
-
-  <audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_0f615ca0bb.mp3?filename=relaxing-piano-melody-110744.mp3" type="audio/mp3">
-  </audio>
-
   <script>
-    // 🌟 Generate stars
+    // Stars
     for (let i = 0; i < 100; i++) {
       let star = document.createElement("div");
       star.className = "star";
@@ -147,25 +107,18 @@
     const modal = document.getElementById("popupModal");
     const okBtn = document.getElementById("okBtn");
     const content = document.getElementById("content");
-    const musicBtn = document.getElementById("musicBtn");
-    const bgMusic = document.getElementById("bgMusic");
 
-    // ✅ Modal button
     okBtn.addEventListener("click", () => {
       modal.style.display = "none";
       content.style.display = "block";
-      musicBtn.style.display = "block";
-
       typeWriter("Good Night, Darin 🌙", "title", () => {
         typeWriter("Semoga tidur lena malam ni… Sweet dream ✨", "message");
       });
-
       setInterval(createEmoji, 1500);
       setInterval(shootingStar, 5000);
       setInterval(firework, 4000);
     });
 
-    // ⌨ Typewriter
     function typeWriter(text, elementId, callback) {
       let i = 0;
       const speed = 70;
@@ -183,94 +136,43 @@
       typing();
     }
 
-    // 🌙 Emoji rain
+    // Emoji rain
     const emojis = ["✨","🌙","😴","⭐"];
     function createEmoji() {
       const emoji = document.createElement("div");
       emoji.className = "emoji";
       emoji.textContent = emojis[Math.floor(Math.random() * emojis.length)];
       emoji.style.left = Math.random() * window.innerWidth + "px";
-      emoji.style.fontSize = (20 + Math.random() * 20) + "px";
       emoji.style.animationDuration = (3 + Math.random() * 3) + "s";
+      emoji.style.fontSize = (20 + Math.random()*20) + "px";
       document.body.appendChild(emoji);
       setTimeout(() => emoji.remove(), 6000);
     }
 
-    // 🎵 Music
-    let playing = false;
-    musicBtn.addEventListener("click", () => {
-      if (!playing) {
-        bgMusic.play().then(()=>{
-          playing = true;
-          musicBtn.textContent = "⏸";
-        }).catch(()=>{
-          console.log("Autoplay blocked. User must press button.");
-        });
-      } else {
-        bgMusic.pause();
-        playing = false;
-        musicBtn.textContent = "🎵";
-      }
-    });
-
-    // 🌠 Shooting star
+    // Shooting star
     function shootingStar() {
       const star = document.createElement("div");
-      star.className = "shooting";
-      star.style.position = "absolute";
-      star.style.top = Math.random() * window.innerHeight * 0.5 + "px";
-      star.style.left = "-50px";
-      star.style.width = "3px";
-      star.style.height = "3px";
-      star.style.background = "white";
-      star.style.boxShadow = "0 0 10px white, 0 0 20px #00f5d4";
-      star.style.borderRadius = "50%";
-      star.style.zIndex = "5";
+      star.className = "shooting-star";
+      star.style.top = Math.random() * window.innerHeight/2 + "px";
+      star.style.left = (window.innerWidth - 200) + "px";
       document.body.appendChild(star);
-
-      let x = 0;
-      const interval = setInterval(() => {
-        x += 15;
-        star.style.transform = translate(${x}px, ${x/3}px);
-        if (x > window.innerWidth) {
-          clearInterval(interval);
-          star.remove();
-        }
-      }, 50);
+      setTimeout(() => star.remove(), 3000);
     }
 
-    // 🎆 Fireworks
+    // Fireworks
     function firework() {
-      const x = Math.random() * window.innerWidth;
-      const y = Math.random() * window.innerHeight * 0.6;
-
-      for (let i = 0; i < 30; i++) {
-        const spark = document.createElement("div");
-        spark.className = "firework";
-        spark.style.left = x + "px";
-        spark.style.top = y + "px";
-        spark.style.width = "4px";
-        spark.style.height = "4px";
-        spark.style.background = hsl(${Math.random()*360},100%,60%);
-        spark.style.boxShadow = 0 0 10px ${spark.style.background};
-        document.body.appendChild(spark);
-
-        const angle = Math.random() * 2 * Math.PI;
-        const distance = Math.random() * 80 + 40;
-        const dx = Math.cos(angle) * distance;
-        const dy = Math.sin(angle) * distance;
-
-        spark.animate([
-          { transform: "translate(0,0)", opacity: 1 },
-          { transform: translate(${dx}px, ${dy}px), opacity: 0 }
-        ], {
-          duration: 1200 + Math.random() * 500,
-          easing: "ease-out",
-          fill: "forwards"
-        });
-
-        setTimeout(() => spark.remove(), 2000);
-      }
+      const fw = document.createElement("div");
+      fw.className = "firework";
+      const size = 80 + Math.random() * 50;
+      fw.style.width = size + "px";
+      fw.style.height = size + "px";
+      fw.style.left = Math.random() * window.innerWidth + "px";
+      fw.style.top = Math.random() * (window.innerHeight/2) + "px";
+      fw.style.background = `radial-gradient(circle, 
+        hsl(${Math.random()*360},100%,60%) 0%, 
+        transparent 70%)`;
+      document.body.appendChild(fw);
+      setTimeout(() => fw.remove(), 1000);
     }
   </script>
 </body>
